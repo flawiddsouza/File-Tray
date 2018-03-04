@@ -1,0 +1,84 @@
+* {
+    box-sizing: border-box;
+}
+
+body, input {
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    margin: 0 auto;
+    margin-top: 1em;
+
+    max-width: 50em;
+
+    text-align: center;
+}
+
+/*-------------------------*/
+/* file upload section     */
+/*-------------------------*/
+
+section form {
+    padding: 1em;
+    border: 1px solid #c4a8f4;
+}
+
+form input[type="file"] {
+    padding: 0.5em;
+    border: 2px solid #c4a8f4;
+}
+
+form input[type=submit] {
+    padding-top: 0.65em;
+    padding-bottom: 0.65em;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+}
+
+progress {
+    display: block;
+
+    margin: 0 auto;
+    margin-top: 0.4em;
+
+    width: 20em;
+}
+
+div {
+    margin-top: 0.4em;
+}
+
+/*-------------------------*/
+/* download links section  */
+/*-------------------------*/
+
+section article {
+    max-width: 50em;
+
+    margin-top: 0.7em;
+    padding: 1em;
+
+    background-color: #fdeaff;
+    border: 1px solid #efaaf7;
+
+    overflow: auto;
+    zoom: 1;
+}
+
+.file-link {
+    float: left;
+
+    line-height: 2em;
+
+    text-decoration: none;
+}
+
+.file-delete {
+    float: right;
+
+    padding: 0.5em;
+
+    cursor: pointer;
+}

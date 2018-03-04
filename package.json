@@ -1,0 +1,13 @@
+{
+  "name": "file_tray",
+  "version": "1.0.0",
+  "description": "share files between devices quickly",
+  "private": true,
+  "main": "app.js",
+  "author": "Flawid D'Souza",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4",
+    "formidable": "^1.0.17"
+  }
+}

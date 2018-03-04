@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>File Tray</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="fetch.js"></script>
+    <script src="application.js"></script>
+</head>
+<body>
+    <section>
+        <form action="/upload" enctype="multipart/form-data">
+            <input type="file" name="file" multiple required>
+            <input type="submit" value="Upload">
+            <progress value="0" max="100"></progress>
+            <div>Status: <span class="upload-status">Ready!</span>
+        </form>
+    </section>
+    <section>
+    </section>
+</body>
+</html>
