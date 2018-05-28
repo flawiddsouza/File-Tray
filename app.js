@@ -58,6 +58,7 @@ app.get('/file-list', function(req, res) {
     }
 
     var fileNamesList = fileList(uploadsDir).map((file) => file.split(path.sep).slice(-1)[0])
+    fileNamesList = fileNamesList.filter(filename => filename !== '.gitignore')
     res.json(fileNamesList)
 })
 
