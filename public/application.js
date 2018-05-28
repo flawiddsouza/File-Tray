@@ -36,22 +36,28 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
         return false // To avoid actual submission of the form
     }
-    
+
     // download links section
     var section2 = document.getElementsByTagName('section')[1]
 
-    fetch('/file-list').then(function(response) { 
-        return response.json()
-    }).then(function(files) {
-        for(var i = 0; i < files.length; i++) 
-        {
-            section2.innerHTML += `
-            <article>
-                <a class="file-link" href="/uploads/${files[i]}">${files[i]}</a>
-                <button data-file-name="${files[i]}" class="file-delete">Delete</button>
-            </article>`
-        }
-    })
+    function refreshFileList() {
+        fetch('/file-list').then(function(response) {
+            return response.json()
+        }).then(function(files) {
+            section2.innerHTML = ''
+            for(var i = 0; i < files.length; i++)
+            {
+                section2.innerHTML += `
+                <article>
+                    <a class="file-link" href="/uploads/${files[i]}">${files[i]}</a>
+                    <button data-file-name="${files[i]}" class="file-delete">Delete</button>
+                </article>`
+            }
+            setTimeout(refreshFileList, 5000)
+        })
+    }
+
+    refreshFileList()
 
     section2.addEventListener('click', function (e) {
          if(e.target.className === 'file-delete') {
