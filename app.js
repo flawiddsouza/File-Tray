@@ -8,6 +8,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 var uploadsDir = path.join(__dirname, 'public/uploads')
 
+var fileListJSONPath = path.join(__dirname, 'fileList.json')
+
 // POST upload
 app.post('/upload', function(req, res) {
 
@@ -26,7 +28,9 @@ app.post('/upload', function(req, res) {
     // rename it to it's original name
     form.on('file', function(field, file) {
         try {
-            fs.rename(file.path, path.join(form.uploadDir, file.name))
+            fs.rename(file.path, path.join(form.uploadDir, file.name), () => {
+                putFileListInJSON()
+            })
         } catch(err) {
             console.error(err)
         }
@@ -47,8 +51,7 @@ app.post('/upload', function(req, res) {
 
 })
 
-// GET File List
-app.get('/file-list', function(req, res) {
+function getFileListFromFileSystem() {
     function fileList(dir) {
       return fs.readdirSync(dir).reduce(function(list, file) {
         var name = path.join(dir, file)
@@ -59,7 +62,23 @@ app.get('/file-list', function(req, res) {
 
     var fileNamesList = fileList(uploadsDir).map((file) => file.split(path.sep).slice(-1)[0])
     fileNamesList = fileNamesList.filter(filename => filename !== '.gitignore')
-    res.json(fileNamesList)
+    return fileNamesList;
+}
+
+function putFileListInJSON() {
+    fs.writeFileSync(fileListJSONPath, JSON.stringify(getFileListFromFileSystem()))
+}
+
+function getFileListFromJSON() {
+    if (!fs.existsSync(fileListJSONPath)) {
+        putFileListInJSON()
+    }
+    return JSON.parse(fs.readFileSync(fileListJSONPath).toString())
+}
+
+// GET File List
+app.get('/file-list', function(req, res) {
+    return res.json(getFileListFromJSON())
 })
 
 // DELETE File
@@ -68,6 +87,7 @@ app.post('/delete-file/:filename', function(req, res) {
     fs.stat(file, function(err, stat) {
         if(err == null) {
             fs.unlink(file, function() {
+                putFileListInJSON()
                 res.send("File Deleted!")
             })
         } else {
