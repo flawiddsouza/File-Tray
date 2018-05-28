@@ -14,6 +14,8 @@ app.post('/upload', function(req, res) {
     // create an incoming form object
     var form = new formidable.IncomingForm()
 
+    form.maxFileSize = '2GB' // default is 200MB
+
     // specify that we want to allow the user to upload multiple files in a single request
     form.multiples = true
 
