@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     }
 
     // download links section
-    var section2 = document.getElementsByTagName('section')[1]
+    var section2 = document.getElementsByTagName('section')[2]
 
     function refreshFileList() {
         fetch('/file-list').then(function(response) {

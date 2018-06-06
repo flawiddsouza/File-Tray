@@ -53,14 +53,18 @@ app.post('/upload', function(req, res) {
 
 function getFileListFromFileSystem() {
     function fileList(dir) {
-      return fs.readdirSync(dir).reduce(function(list, file) {
-        var name = path.join(dir, file)
-        var isDir = fs.statSync(name).isDirectory()
-        return list.concat(isDir ? fileList(name) : [name])
-      }, [])
+        return fs.readdirSync(dir).reduce(function(list, file) {
+            var name = path.join(dir, file)
+            var isDir = fs.statSync(name).isDirectory()
+            return list.concat(isDir ? fileList(name) : [name])
+        }, [])
     }
 
-    var fileNamesList = fileList(uploadsDir).map((file) => file.split(path.sep).slice(-1)[0])
+    var fileNamesList = fileList(uploadsDir)
+    fileNamesList = fileNamesList.sort((file1, file2) => { // sort by date modifed
+        return fs.statSync(file1).mtime.getTime() - fs.statSync(file2).mtime.getTime()
+    }).reverse() // descending
+    fileNamesList = fileNamesList.map((file) => file.split(path.sep).slice(-1)[0])
     fileNamesList = fileNamesList.filter(filename => filename !== '.gitignore')
     return fileNamesList;
 }
