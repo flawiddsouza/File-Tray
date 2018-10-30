@@ -64,18 +64,20 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
     section2.addEventListener('click', function (e) {
          if(e.target.className === 'file-delete') {
-            var clickedArticle = e.target
-            var fileName = clickedArticle.dataset.fileName
+            if(confirm('Are you sure?')) {
+                var clickedArticle = e.target
+                var fileName = clickedArticle.dataset.fileName
 
-            var request2 = new XMLHttpRequest()
-            request2.onreadystatechange = function() {
-                if (request2.readyState==4 && request2.status==200){
-                    // console.log(request2.response)
-                    clickedArticle.parentElement.remove()
+                var request2 = new XMLHttpRequest()
+                request2.onreadystatechange = function() {
+                    if (request2.readyState==4 && request2.status==200){
+                        // console.log(request2.response)
+                        clickedArticle.parentElement.remove()
+                    }
                 }
+                request2.open('POST', `/delete-file/${fileName}`, true)
+                request2.send()
             }
-            request2.open('POST', `/delete-file/${fileName}`, true)
-            request2.send()
          }
     })
 
