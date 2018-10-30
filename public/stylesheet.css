@@ -71,8 +71,14 @@ section article {
     float: left;
 
     line-height: 2em;
+}
 
+.file-link a {
     text-decoration: none;
+}
+
+.file-link a:hover {
+    text-decoration: underline;
 }
 
 .file-delete {

@@ -64,7 +64,12 @@ function getFileListFromFileSystem() {
     fileNamesList = fileNamesList.sort((file1, file2) => { // sort by date modifed
         return fs.statSync(file1).mtime.getTime() - fs.statSync(file2).mtime.getTime()
     }).reverse() // descending
-    fileNamesList = fileNamesList.map((file) => file.split(path.sep).slice(-1)[0])
+    fileNamesList = fileNamesList.map(file => {
+        return {
+            filename: file.split(path.sep).slice(-1)[0],
+            uploadedAt: fs.statSync(file).mtime.getTime()
+        }
+    })
     fileNamesList = fileNamesList.filter(filename => filename !== '.gitignore')
     return fileNamesList;
 }

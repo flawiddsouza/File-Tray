@@ -49,8 +49,11 @@ document.addEventListener('DOMContentLoaded', function(event) {
             {
                 section2.innerHTML += `
                 <article>
-                    <a class="file-link" href="/uploads/${files[i]}">${files[i]}</a>
-                    <button data-file-name="${files[i]}" class="file-delete">Delete</button>
+                    <div class="file-link">
+                        <a href="/uploads/${files[i]['filename']}">${files[i]['filename']}</a>
+                        <date>${new Date(files[i]['uploadedAt']).toLocaleString('en-US', { day: '2-digit', month: 'short', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })}</date>
+                    </div>
+                    <button data-file-name="${files[i]['filename']}" class="file-delete">Delete</button>
                 </article>`
             }
             setTimeout(refreshFileList, 5000)
