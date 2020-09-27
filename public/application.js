@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     var section2 = document.getElementsByTagName('section')[2]
 
     function refreshFileList() {
-        fetch('/file-list').then(function(response) {
+        fetch('file-list').then(function(response) {
             return response.json()
         }).then(function(files) {
             section2.innerHTML = ''
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
                 section2.innerHTML += `
                 <article>
                     <div class="file-link">
-                        <a href="/uploads/${files[i]['filename']}">${files[i]['filename']}</a>
+                        <a href="uploads/${files[i]['filename']}">${files[i]['filename']}</a>
                         <date>${new Date(files[i]['uploadedAt']).toLocaleString('en-US', { day: '2-digit', month: 'short', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true })}</date>
                     </div>
                     <button data-file-name="${files[i]['filename']}" class="file-delete">Delete</button>
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
                         clickedArticle.parentElement.remove()
                     }
                 }
-                request2.open('POST', `/delete-file/${fileName}`, true)
+                request2.open('POST', `delete-file/${fileName}`, true)
                 request2.send()
             }
          }

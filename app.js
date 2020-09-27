@@ -105,7 +105,4 @@ app.post('/delete-file/:filename', function(req, res) {
     })
 })
 
-// bring to life
-app.listen(9871, function(){
-    console.log('Listening at: http://localhost:9871')
-})
+module.exports = app
