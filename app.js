@@ -70,7 +70,7 @@ function getFileListFromFileSystem() {
             uploadedAt: fs.statSync(file).mtime.getTime()
         }
     })
-    fileNamesList = fileNamesList.filter(filename => filename !== '.gitignore')
+    fileNamesList = fileNamesList.filter(file => file.filename !== '.gitignore')
     return fileNamesList;
 }
 
