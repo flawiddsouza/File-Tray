@@ -1,5 +1,5 @@
 let app = require('./app')
-
-app.listen(9871, function(){
-    console.log('Listening at: http://localhost:9871')
+const port = process.env.PORT || 9871
+app.listen(port, function(){
+    console.log(`Listening at: http://localhost:${port}`)
 })
