@@ -7,7 +7,7 @@
   "author": "Flawid D'Souza",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.13.4",
+    "express": "^4.17.3",
     "formidable": "^1.0.17"
   }
 }
